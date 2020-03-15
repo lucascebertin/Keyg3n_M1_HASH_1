@@ -1,0 +1,61 @@
+check_key:
+
++-------------------------------------------------------------------------------+
+| 7fa:	push   rbp                                                              |
+| 7fb:	mov    rbp,rsp                                                          |                                                           
+| 7fe:	push   rbx                                                              |
+| 7ff:	sub    rsp,0x28                                                         |
+| 803:	mov    QWORD PTR [rbp-0x28],rdi                                         |
+| 807:	mov    DWORD PTR [rbp-0x18],0x0                                         |
+| 80e:	mov    DWORD PTR [rbp-0x14],0x0                                         |
+| 815:	mov    rax,QWORD PTR [rbp-0x28]                                         |
+| 819:	mov    rdi,rax                                                          |
+| 81c:	call   690 <strlen@plt>                                                 |
+| 821:	cmp    rax,0x7                                                          |
+| 825:	jbe    839 <check_key+0x3f>                                             +--------------+ //se menor-igual que 0x7 (7)
+| 82b:	mov    rdi,rax                                                          |              | 
+| 82e:	call   690 <strlen@plt>                                                 |              |        
+| 827:	mov    rax,QWORD PTR [rbp-0x28]                                         |              |
++-------------------------------------------------------------------------------+              |              
+                                                                                               |              
++-------------------------------------------------------------------------------+              |              
+| 833:	cmp    rax,0xa                                                          |              |              
+| 837:	jbe    854 <check_key+0x5a>                                             +--------------+--------------+ //se menor igual a 0xa (10)
+| 839:	lea    rdi,[rip+0x184]        # 9c4 <_IO_stdin_used+0x4>                |<-------------+              |
+| 840:	mov    eax,0x0                                                          |                             |
+| 845:	call   6b0 <printf@plt>                                                 |                             |
+| 84a:	mov    edi,0x0                                                          |                             |
+| 84f:	call   6d0 <exit@plt>                                                   |                             |
+| 854:	mov    DWORD PTR [rbp-0x18],0x0                                         |<----------------------------+
+| 85b:	jmp    877 <check_key+0x7d>                                             +--------------+
++-------------------------------------------------------------------------------+              |
+                                                                                               |
++-------------------------------------------------------------------------------+              |
+| 85d:	mov    eax,DWORD PTR [rbp-0x18]                                         |<-------------+--------------+  
+| 860:	movsxd rdx,eax                                                          |              |              |
+| 863:	mov    rax,QWORD PTR [rbp-0x28]                                         |              |              |
+| 867:	add    rax,rdx                                                          |              |              |
+| 86a:	movzx  eax,BYTE PTR [rax]                                               |              |              |
+| 86d:	movsx  eax,al                                                           |              |              |
+| 870:	add    DWORD PTR [rbp-0x14],eax                                         |              |              |
+| 873:	add    DWORD PTR [rbp-0x18],0x1                                         |              |              |
+| 877:	mov    eax,DWORD PTR [rbp-0x18]                                         |<-------------+              |
+| 87a:	movsxd rbx,eax                                                          |                             |
+| 87d:	mov    rax,QWORD PTR [rbp-0x28]                                         |                             |
+| 881:	mov    rdi,rax                                                          |                             |
+| 884:	call   690 <strlen@plt>                                                 |                             |
+| 889:	cmp    rbx,rax                                                          |                             |
+| 88c:	jb     85d <check_key+0x63>                                             +-----------------------------+
+| 88e:	cmp    DWORD PTR [rbp-0x14],0x3e7                                       |
+| 895:	jg     8b2 <check_key+0xb8>                                             +--------------+ se rbp-0x14 > 0x3e7
+| 897:	lea    rdi,[rip+0x126]        # 9c4 <_IO_stdin_used+0x4>                |              |
+| 89e:	mov    eax,0x0                                                          |              |
+| 8a3:	call   6b0 <printf@plt>                                                 |              | flag??
+| 8a8:	mov    edi,0x0                                                          |              |
+| 8ad:	call   6d0 <exit@plt>                                                   |              |
+| 8b2:	mov    eax,0x1                                                          |<-------------+
+| 8b7:	add    rsp,0x28                                                         |
+| 8bb:	pop    rbx                                                              |
+| 8bc:	pop    rbp                                                              |
+| 8bd:	ret                                                                     |
++-------------------------------------------------------------------------------+
